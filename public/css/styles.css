@@ -12,8 +12,12 @@ body {
   padding: 0;
   font-family: "Poppins", sans-serif;
 }
+html {
+  background-image: url("../images/site/checkerboard.jpg");
+}
 body {
-  background-color: #f4f4f4;
+  background-color: #fff;
+  border: #333 10px solid;
   color: #333;
   line-height: 1.6;
 }
@@ -79,4 +83,23 @@ h2 {
   list-style: none;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}
+@media only screen and (min-width: 600px) {
+  html {
+    margin: 70px;
+    padding: 0;
+    font-family: "Poppins", sans-serif;
+  }
+  #description {
+    display: flex;
+    justify-content: space-evenly;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+  #side img {
+    width: 100%;
+    height: auto;
+    align-items: center;
+    justify-content: center;
+  }
 }
