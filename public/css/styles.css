@@ -21,7 +21,10 @@ body {
   color: #333;
   line-height: 1.6;
 }
-
+a {
+  text-decoration: none;
+  color: #edf3e8;
+}
 #top-header {
   margin: 10px;
   display: flex;
@@ -84,6 +87,108 @@ h2 {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
 }
+
+#inv-display {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+  justify-content: center;
+}
+
+#inv-display li {
+  width: 100%;
+  height: auto;
+  margin: 30px;
+  padding: 10px;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  list-style: none;
+  justify-content: center;
+  align-items: center;
+}
+
+#inv-display img {
+  width: 100%;
+  height: 50%;
+  border-radius: 10px;
+}
+
+#inv-display h3 {
+  text-align: center;
+  font-size: 1.2rem;
+  margin-top: 10px;
+}
+
+#inv-display span {
+  text-align: center;
+  justify-content: center;
+  font-size: 1rem;
+  font-weight: bolder;
+  color: #666;
+}
+
+#inv-display a {
+  text-decoration: none;
+  text-align: center;
+  color: #333;
+}
+
+#inv-display hr {
+  border: 2px solid;
+  width: 100%;
+  height: 3px;
+  background: #333;
+  margin: 10px 0;
+}
+
+#inv-display div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+h1 {
+  text-align: center;
+  font-size: 2rem;
+  margin: 20px;
+}
+
+#details {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 20px;
+}
+
+#details img {
+  width: 100%;
+  height: auto;
+  border-radius: 20px;
+}
+
+#error {
+  display: flex;
+  justify-content: center;
+  width: 70%;
+  margin-left: 15%;
+  margin-right: 15%;
+  align-items: center;
+}
+p {
+  margin: 10px;
+  font-size: 1rem;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.dark {
+  color: #333;
+}
 @media only screen and (min-width: 600px) {
   html {
     margin: 70px;
@@ -101,5 +206,26 @@ h2 {
     height: auto;
     align-items: center;
     justify-content: center;
+  }
+  #inv-display li {
+    width: 33%;
+    height: auto;
+  }
+  #details {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+  }
+  #details img {
+    width: 45%;
+    height: auto;
+    border-radius: 20px;
+  }
+}
+
+@media only screen and (min-width: 900px) {
+  #inv-display li {
+    width: 25%;
+    height: auto;
   }
 }

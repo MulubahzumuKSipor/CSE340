@@ -10,6 +10,9 @@ const env = require("dotenv").config();
 const app = express();
 const static = require("./routes/static");
 const expressLayouts = require("express-ejs-layouts");
+const baseController = require("./controllers/baseController");
+const inventoryRoute = require("./routes/inventoryRoute");
+const errorRoute = require("./routes/errorRoute");
 
 /* ***********************
  * View Engine and Templates
@@ -23,9 +26,11 @@ app.set("layout", "./layouts/layout"); // not at views root
  *************************/
 app.use(static);
 // Index Route
-app.get("/", function (req, res) {
-  res.render("index", { title: "Home" });
-});
+app.get("/", baseController.buildHome);
+// Inventory Route
+app.use("/inv", inventoryRoute);
+// 500 Error Route
+app.use("/", errorRoute);
 
 /* ***********************
  * Local Server Information
@@ -39,4 +44,28 @@ const host = process.env.HOST;
  *************************/
 app.listen(port, () => {
   console.log(`app listening on ${host}:${port}`);
+});
+
+/* ***********************
+ * Middleware
+ * This is used to parse the body of the request
+ * so that we can access the data in the request body
+ *************************/
+app.use(async (err, req, res, next) => {
+  console.error(err.stack);
+  const nav = await require("./utilities/").getNav();
+  res.status(500).render("error/error", {
+    title: "Server Error",
+    message: "Something went wrong on the server.",
+    nav,
+  });
+});
+
+app.use(async (req, res) => {
+  const nav = await require("./utilities/").getNav();
+  res.status(404).render("error/error", {
+    title: "404 - Page Not Found",
+    message: "The page you are looking for does not exist.",
+    nav,
+  });
 });
