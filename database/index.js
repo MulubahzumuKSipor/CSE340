@@ -8,6 +8,7 @@ require("dotenv").config();
  * *************** */
 let pool;
 if (process.env.NODE_ENV == "production") {
+  // Don't forget to change development to production when deploying
   pool = new Pool({
     connectionString: process.env.DATABASE_URL,
     ssl: {

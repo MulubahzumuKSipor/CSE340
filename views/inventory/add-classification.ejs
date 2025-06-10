@@ -1,0 +1,25 @@
+<% if (errors && errors.length > 0) { %>
+<ul class="notice">
+  <% errors.forEach(error => { %>
+  <li><%= error.msg %></li>
+  <% }) %>
+</ul>
+<% } %> <% if (message) { %>
+<p class="notice"><%= message %></p>
+<% } %>
+
+<form action="/inv/add-classification" method="post">
+  <label class="classificationName" for="classification_name"
+    >Classification Name</label
+  >
+  <input
+    type="text"
+    name="classification_name"
+    id="classification_name"
+    value="<%= locals.classification_name || '' %>"
+    pattern="[A-Za-z0-9]+"
+    title="Classification name cannot contain spaces or special characters."
+    required
+  />
+  <button class="send" type="submit">Submit</button>
+</form>

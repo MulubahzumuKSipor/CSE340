@@ -1,0 +1,95 @@
+<% if (errors && errors.length > 0) { %>
+<ul class="notice">
+  <% errors.forEach(error => { %>
+  <li><%= error.msg %></li>
+  <% }) %>
+</ul>
+<% } %> <% if (message) { %>
+<p class="notice"><%= message %></p>
+<% } %>
+
+<form action="/inv/add-inventory" method="post">
+  <label id="classForm" for="classificationList">Classification:</label>
+  <%- locals.classificationList %>
+
+  <label class="classLabel" for="invMake">Make:</label>
+  <input
+    class="classInput"
+    type="text"
+    id="invMake"
+    name="inv_make"
+    value="<%= locals.inv_make || '' %>"
+    required
+  />
+
+  <label class="classLabel" for="invModel">Model:</label>
+  <input
+    class="classInput"
+    type="text"
+    id="invModel"
+    name="inv_model"
+    value="<%= locals.inv_model || '' %>"
+    required
+  />
+
+  <label class="classLabel" for="invYear">Year:</label>
+  <input
+    class="classInput"
+    type="number"
+    id="invYear"
+    name="inv_year"
+    value="<%= locals.inv_year || '' %>"
+    required
+    min="1886"
+    max="<%= new Date().getFullYear() + 1 %>"
+  />
+
+  <label class="classLabel" for="invDescription">Description:</label>
+  <textarea
+    class="classInput"
+    id="invDescription"
+    name="inv_description"
+    required
+  >
+<%= locals.inv_description || '' %></textarea
+  >
+
+  <img src="/images/vehicles/no-image.png" alt="New Vehicle Image" />
+
+  <img src="/images/vehicles/no-image-tn.png" alt="New Vehicle Thumbnail" />
+
+  <label class="classLabel" for="invPrice">Price:</label>
+  <input
+    class="classInput"
+    type="number"
+    id="invPrice"
+    name="inv_price"
+    value="<%= locals.inv_price || '' %>"
+    required
+    min="0"
+    step="0.01"
+  />
+
+  <label class="classLabel" for="invMiles">Miles:</label>
+  <input
+    class="classInput"
+    type="number"
+    id="invMiles"
+    name="inv_miles"
+    value="<%= locals.inv_miles || '' %>"
+    required
+    min="0"
+  />
+
+  <label class="classLabel" for="invColor">Color:</label>
+  <input
+    class="classInput"
+    type="text"
+    id="invColor"
+    name="inv_color"
+    value="<%= locals.inv_color || '' %>"
+    required
+  />
+
+  <button class="send" type="submit">Add Vehicle</button>
+</form>

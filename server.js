@@ -13,6 +13,8 @@ const expressLayouts = require("express-ejs-layouts");
 const baseController = require("./controllers/baseController");
 const inventoryRoute = require("./routes/inventoryRoute");
 const errorRoute = require("./routes/errorRoute");
+const session = require("express-session");
+const flash = require("connect-flash");
 
 /* ***********************
  * View Engine and Templates
@@ -20,6 +22,31 @@ const errorRoute = require("./routes/errorRoute");
 app.set("view engine", "ejs");
 app.use(expressLayouts);
 app.set("layout", "./layouts/layout"); // not at views root
+
+/* ***********************
+ * Middleware
+ * This is used to parse the body of the request
+ * so that we can access the data in the request body
+ *************************/
+// Session setup
+app.use(
+  session({
+    secret: "superSecret", // use a strong secret in production
+    resave: false,
+    saveUninitialized: true,
+  })
+);
+
+// Flash message middleware
+app.use(flash());
+
+app.use((req, res, next) => {
+  res.locals.message = req.flash("message");
+  next();
+});
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 /* ***********************
  * Routes
