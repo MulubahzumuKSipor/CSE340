@@ -351,10 +351,10 @@ select {
 }
 
 form img {
-  max-width: 100px; /* Adjust as needed for image size */
+  max-width: 100px;
   height: auto;
-  display: block; /* Ensures images are on their own line */
-  margin: 10px auto 20px; /* Center images and provide spacing */
+  display: block;
+  margin: 10px auto 20px;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
@@ -382,4 +382,189 @@ form img {
     margin: 20px 10px;
     padding: 20px;
   }
+}
+
+.notice {
+  list-style-type: none;
+  padding: 0;
+  margin: 15px 0;
+  color: #dc3545;
+  font-weight: bold;
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  border-radius: 5px;
+  padding: 10px 20px;
+}
+
+.notice li {
+  margin-bottom: 5px;
+}
+
+.notice li:last-child {
+  margin-bottom: 0;
+}
+
+/* Account Update form */
+
+form#accountUpdateForm,
+form#passwordChangeForm {
+  max-width: 500px;
+  margin: 30px auto;
+  padding: 25px;
+  background-color: #f9f9f9;
+  border: 1px solid #dcdcdc;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+form#accountUpdateForm fieldset,
+form#passwordChangeForm fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+form#accountUpdateForm label,
+form#passwordChangeForm label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #333;
+  font-size: 0.95em;
+}
+
+form#accountUpdateForm input[type="text"],
+form#accountUpdateForm input[type="email"],
+form#passwordChangeForm input[type="password"] {
+  width: calc(100% - 20px);
+  padding: 12px 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-size: 1em;
+  transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+form#accountUpdateForm input[type="text"]:focus,
+form#accountUpdateForm input[type="email"]:focus,
+form#passwordChangeForm input[type="password"]:focus {
+  border-color: #6a5acd;
+  box-shadow: 0 0 8px rgba(106, 90, 205, 0.2);
+  outline: none;
+}
+
+.password-info {
+  font-size: 0.85em;
+  color: #666;
+  margin-top: -10px;
+  margin-bottom: 20px;
+  line-height: 1.4;
+  text-align: left;
+}
+
+form#accountUpdateForm button[type="submit"],
+form#passwordChangeForm button[type="submit"] {
+  background-color: brown; /* A pleasant green */
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.05em;
+  font-weight: bold;
+  width: 100%;
+  transition: background-color 0.3s ease;
+}
+
+form#accountUpdateForm button[type="submit"]:hover,
+form#accountChangeForm button[type="submit"]:focus, /* Include focus for accessibility */
+form#passwordChangeForm button[type="submit"]:hover,
+form#passwordChangeForm button[type="submit"]:focus {
+  background-color: darkred;
+}
+
+hr {
+  border: 0;
+  height: 1px;
+  background-image: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0),
+    rgba(0, 0, 0, 0.25),
+    rgba(0, 0, 0, 0)
+  );
+  margin: 40px auto;
+  width: 80%;
+}
+
+::-webkit-input-placeholder {
+  color: #a0a0a0;
+}
+::-moz-placeholder {
+  color: #a0a0a0;
+}
+:-ms-input-placeholder {
+  color: #a0a0a0;
+}
+:-moz-placeholder {
+  color: #a0a0a0;
+}
+
+@media only screen and (max-width: 768px) {
+  form#accountUpdateForm,
+  form#passwordChangeForm {
+    margin: 20px 15px; /* More margin on smaller screens */
+    padding: 20px;
+  }
+}
+
+/* Account Management */
+
+.container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  font-family: Arial, sans-serif;
+}
+
+.notice {
+  background-color: #ffe9e9;
+  color: #d8000c;
+  padding: 1rem;
+  border-left: 4px solid #d8000c;
+  margin-bottom: 1rem;
+  list-style: inside;
+  border-radius: 5px;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.btn {
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  border-radius: 5px;
+  background-color: #333;
+  color: #fff;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.btn:hover {
+  background-color: #555;
+}
+
+p {
+  text-align: center;
+  margin: 0.5rem 0;
 }

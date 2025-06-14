@@ -6,7 +6,7 @@ const {
   classificationRules,
   inventoryRules,
   handleValidationErrors,
-  checkData,
+  checkAccountType,
 } = require("../utilities/index");
 
 // Route to build inventory by classification view
@@ -16,24 +16,30 @@ router.get("/type/:classificationId", invController.buildByClassificationId);
 router.get("/detail/:invId", invController.buildInventoryDetails);
 
 // Route to inventory management page
-router.get("/", invController.buildManagement);
+router.get("/", checkAccountType, invController.buildManagement);
 
-router.get("/add-classification", invController.buildAddClassification);
+router.get(
+  "/add-classification",
+  checkAccountType,
+  invController.buildAddClassification
+);
 router.post(
   "/add-classification",
+  checkAccountType,
   classificationRules,
   handleValidationErrors,
-  checkData,
   invController.addClassification
 );
 
 router.get("/add-inventory", invController.buildAddInventory);
 router.post(
   "/add-inventory",
+  checkAccountType,
   inventoryRules,
   handleValidationErrors,
-  checkData,
   invController.addInventory
 );
+
+router.get("/getInventory/:classification_id", invController.getInventoryJSON);
 
 module.exports = router;

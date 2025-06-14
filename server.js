@@ -9,12 +9,16 @@ const express = require("express");
 const env = require("dotenv").config();
 const app = express();
 const static = require("./routes/static");
+const pool = require("./database/");
 const expressLayouts = require("express-ejs-layouts");
 const baseController = require("./controllers/baseController");
 const inventoryRoute = require("./routes/inventoryRoute");
 const errorRoute = require("./routes/errorRoute");
 const session = require("express-session");
 const flash = require("connect-flash");
+const cookieParser = require("cookie-parser");
+const accountRoute = require("./routes/accountRoute");
+const utilities = require("./utilities/")
 
 /* ***********************
  * View Engine and Templates
@@ -31,9 +35,14 @@ app.set("layout", "./layouts/layout"); // not at views root
 // Session setup
 app.use(
   session({
-    secret: "superSecret", // use a strong secret in production
+    store: new (require("connect-pg-simple")(session))({
+      createTableIfMissing: true,
+      pool,
+    }),
+    secret: process.env.Session_Secret, // use a strong secret in production
     resave: false,
     saveUninitialized: true,
+    name: "sessionId",
   })
 );
 
@@ -45,15 +54,26 @@ app.use((req, res, next) => {
   next();
 });
 
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
+app.use(require("connect-flash")());
+app.use(function (req, res, next) {
+  res.locals.messages = require("express-messages")(req, res);
+  next();
+});
+app.use(utilities.checkJWTToken)
 /* ***********************
  * Routes
  *************************/
+
 app.use(static);
 // Index Route
 app.get("/", baseController.buildHome);
+// Account ROute
+app.use("/account", accountRoute);
 // Inventory Route
 app.use("/inv", inventoryRoute);
 // 500 Error Route
@@ -81,6 +101,7 @@ app.listen(port, () => {
 app.use(async (err, req, res, next) => {
   console.error(err.stack);
   const nav = await require("./utilities/").getNav();
+  // console.error(`Error at: "${req.originalUrl}": ${err.message}`);
   res.status(500).render("error/error", {
     title: "Server Error",
     message: "Something went wrong on the server.",
@@ -96,3 +117,4 @@ app.use(async (req, res) => {
     nav,
   });
 });
+

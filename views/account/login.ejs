@@ -1,0 +1,42 @@
+<% if (locals.errors) { %>
+  <ul class="notice">
+    <% locals.errors.forEach(error => { %>
+      <li><%- messages() %></li>
+    <% }) %>
+  </ul>
+<% } %>
+
+<form action="/account/login" method="POST" class="login-form">
+    <div class="form-group">
+        <label for="account_email">Email Address:</label>
+        <input type="email" id="account_email" name="account_email" required
+                value="<%= locals.account_email ? locals.account_email : '' %>">
+    </div>
+    <div class="form-group">
+        <label for="account_password">Password:</label>
+        <div class="password-wrapper">
+            <input type="password" id="account_password" name="account_password" required>
+            <span class="password-toggle" onclick="togglePasswordVisibility()">👁️</span>
+        </div>
+    </div>
+    <button type="submit" class="btn-submit">Login</button>
+</form>
+<p class="registration-link">
+  Don't have an account?
+  <a class="dark" href="/account/register">Register here</a>
+</p>
+
+<script>
+  function togglePasswordVisibility() {
+    const passwordField = document.getElementById("account_password");
+    const toggleButton = document.querySelector(".password-toggle");
+    if (passwordField.type === "password") {
+      passwordField.type = "text";
+      toggleButton.textContent = "🔒"; // Change icon to a locked eye or similar
+    } else {
+      passwordField.type = "password";
+      toggleButton.textContent = "👁️"; // Change icon back to an open eye or similar
+    }
+  }
+</script>
+<%- messages() %>

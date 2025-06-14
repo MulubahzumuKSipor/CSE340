@@ -1,0 +1,36 @@
+<div class="container">
+  <h1><%= title %></h1>
+
+  <% if (locals.errors) { %>
+  <ul class="notice">
+    <% locals.errors.forEach(error => { %>
+    <li><%= error.msg %></li>
+    <% }) %>
+  </ul>
+  <% } %>
+
+  <p>Welcome <strong><%= locals.accountData.account_first_name %></strong></p>
+  <p>You're logged in!</p>
+
+  <% if (locals.accountData.account_type === 'Admin' ||
+  locals.accountData.account_type === 'Employee') { %>
+  <p>As an admin, you can manage user accounts and view system settings.</p>
+  <div class="actions">
+    <a class="btn" href="/inv/">Inventory Management</a>
+    <a
+      class="btn"
+      href="/account/update-account/<%= locals.accountData.account_id %>"
+      >Account Management</a
+    >
+  </div>
+  <% } else { %>
+  <p>As a user, you can view your account details and update your profile.</p>
+  <div class="actions">
+    <a
+      class="btn"
+      href="/account/update-account/<%= locals.accountData.account_id %>"
+      >Account Management</a
+    >
+  </div>
+  <% } %>
+</div>
