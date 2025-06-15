@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const accountController = require("../controllers/accountController");
 const utilities = require("../utilities/index");
-const { checkExistingEmail } = require("../models/account-model");
+// const { checkExistingEmail } = require("../models/account-model");
 
 router.get("/login", accountController.buildLogin);
 
@@ -17,7 +17,7 @@ router.get("/register", accountController.buildRegister);
 router.post(
   "/register",
   utilities.registrationRules,
-  checkExistingEmail,
+  utilities.checkEmailExists,
   utilities.handleValidationErrors,
   accountController.registerAccount
 );

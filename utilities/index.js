@@ -352,5 +352,16 @@ Util.checkAccountType = (req, res, next) => {
   }
 };
 
-Util.loginStatus = async function (req, res, next) {};
+Util.checkEmailExists = async function (req, res, next) {
+  const { account_email } = req.body;
+  const emailExists = await accountModel.checkExistingEmail(account_email);
+
+  if (emailExists) {
+    req.flash("notice", "That email is already registered.");
+    res.redirect("/account/register");
+  } else {
+    next();
+  }
+};
+
 module.exports = Util;

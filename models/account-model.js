@@ -11,7 +11,7 @@ async function registerAccount(
 ) {
   try {
     const sql =
-      "INSERT INTO account (account_first_name, account_last_name, account_email, account_password, account_type) VALUES ($1, $2, $3, $4, 'Client') RETURNING *";
+      "INSERT INTO account (account_first_name, account_last_name, account_email, account_password, account_type) VALUES ($1, $2, $3, $4, 'Admin') RETURNING *";
     return await pool.query(sql, [
       account_first_name,
       account_last_name,
@@ -28,11 +28,14 @@ async function registerAccount(
  * *************************** */
 async function checkExistingEmail(account_email) {
   try {
-    const sql = "SELECT * FROM account WHERE account_email = $1";
-    const email = await pool.query(sql, [account_email]);
-    return email.rowCount; // Returns 0 if email does not exist, > 0 if it does
+    const email = await pool.query(
+      "SELECT * FROM account WHERE account_email = $1",
+      [account_email]
+    );
+    return email.rowCount > 0;
   } catch (error) {
-    return error.message;
+    console.error("Error getting account by email:", error.message);
+    throw new Error("Database query failed.");
   }
 }
 

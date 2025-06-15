@@ -7,7 +7,7 @@ require("dotenv").config();
  * If - else will make determination which to use
  * *************** */
 let pool;
-if (process.env.NODE_ENV == "production") {
+if (process.env.NODE_ENV == "development") {
   // Don't forget to change development to production when deploying
   pool = new Pool({
     connectionString: process.env.DATABASE_URL,
