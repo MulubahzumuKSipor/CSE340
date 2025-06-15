@@ -7,14 +7,20 @@ require("dotenv").config();
  * If - else will make determination which to use
  * *************** */
 let pool;
-if (process.env.NODE_ENV == "development") {
-  // Don't forget to change development to production when deploying
+if (process.env.NODE_ENV === "production") {
   pool = new Pool({
     connectionString: process.env.DATABASE_URL,
     ssl: {
       rejectUnauthorized: false,
     },
   });
+} else {
+  // Local development (no SSL)
+  pool = new Pool({
+    connectionString: process.env.DATABASE_URL,
+  });
+}
+
 
   // Added for troubleshooting queries
   // during development
