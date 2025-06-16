@@ -14,7 +14,10 @@
 
   <% if (locals.accountData.account_type === 'Admin' ||
   locals.accountData.account_type === 'Employee') { %>
-  <p>As an admin, you can manage user accounts and view system settings.</p>
+  <p>
+    As an admin, you can manage user accounts, view system settings <br />
+    and know how many users are registered to this site.
+  </p>
   <div class="actions">
     <a class="btn" href="/inv/">Inventory Management</a>
     <a
@@ -22,6 +25,7 @@
       href="/account/update-account/<%= locals.accountData.account_id %>"
       >Account Management</a
     >
+    <a class="btn" href="/user/users">Users Registered</a>
   </div>
   <% } else { %>
   <p>As a user, you can view your account details and update your profile.</p>

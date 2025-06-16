@@ -4,6 +4,7 @@ const { validationResult } = require("express-validator");
 const accountModel = require("../models/account-model");
 const { body } = require("express-validator");
 const jwt = require("jsonwebtoken");
+const userModel = require("../models/user-model");
 
 /* ************************
  * Constructs the nav HTML unordered list
@@ -362,6 +363,32 @@ Util.checkEmailExists = async function (req, res, next) {
   } else {
     next();
   }
+};
+
+Util.buildUserList = async function (req, res, next) {
+  let data = await userModel.getAllAccounts();
+
+  let list = "<h2> All Users registered <h2>";
+  list += "<table class='full_table' >";
+  list +=
+    "<thead class='tabhead'><tr><th>First Name</th><th>Last Name</th><th>Email</th><th>Type</th></tr></thead>";
+  data.forEach((row) => {
+    list +=
+      "<tbody class='tabody'><tr><td class='elements'>" +
+      row.account_first_name +
+      "</td>" +
+      "<td class='elements'>" +
+      row.account_last_name +
+      "</td>" +
+      "<td class='elements'>" +
+      row.account_email +
+      "</td>" +
+      "<td class='elements'>" +
+      row.account_type +
+      "</td></tr>";
+  });
+  list += "</table>";
+  return list;
 };
 
 module.exports = Util;

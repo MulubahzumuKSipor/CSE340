@@ -13,12 +13,13 @@ const pool = require("./database/");
 const expressLayouts = require("express-ejs-layouts");
 const baseController = require("./controllers/baseController");
 const inventoryRoute = require("./routes/inventoryRoute");
+const userRoute = require("./routes/userRoute");
 const errorRoute = require("./routes/errorRoute");
 const session = require("express-session");
 const flash = require("connect-flash");
 const cookieParser = require("cookie-parser");
 const accountRoute = require("./routes/accountRoute");
-const utilities = require("./utilities/")
+const utilities = require("./utilities/");
 
 /* ***********************
  * View Engine and Templates
@@ -54,7 +55,6 @@ app.use((req, res, next) => {
   next();
 });
 
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
@@ -64,7 +64,7 @@ app.use(function (req, res, next) {
   res.locals.messages = require("express-messages")(req, res);
   next();
 });
-app.use(utilities.checkJWTToken)
+app.use(utilities.checkJWTToken);
 /* ***********************
  * Routes
  *************************/
@@ -76,6 +76,8 @@ app.get("/", baseController.buildHome);
 app.use("/account", accountRoute);
 // Inventory Route
 app.use("/inv", inventoryRoute);
+// Users Route
+app.use("/user", userRoute);
 // 500 Error Route
 app.use("/", errorRoute);
 
@@ -117,4 +119,3 @@ app.use(async (req, res) => {
     nav,
   });
 });
-

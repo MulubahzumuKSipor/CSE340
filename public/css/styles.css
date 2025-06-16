@@ -568,3 +568,44 @@ p {
   text-align: center;
   margin: 0.5rem 0;
 }
+
+/* Users Table */
+
+h2 {
+  text-align: center;
+}
+.full_table {
+  margin-top: 20px;
+  margin-bottom: 25px;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tabhead {
+  background-color: #a52a2a;
+  color: #ffffff;
+}
+
+.tabhead th {
+  margin-left: 10px;
+  padding: 10px;
+  text-align: left;
+  border-bottom: 2px solid #a52a2a;
+}
+
+.tabody tr:nth-child(even) {
+  background-color: #f8f8f8;
+}
+
+.tabody tr:nth-child(odd) {
+  background-color: #ffffff;
+}
+
+.elements {
+  padding: 8px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.tabody tr:hover {
+  background-color: #f0f0f0;
+}
