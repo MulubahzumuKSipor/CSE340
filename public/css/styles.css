@@ -609,3 +609,77 @@ h2 {
 .tabody tr:hover {
   background-color: #f0f0f0;
 }
+
+/* --- Media Queries for Responsive Design --- */
+
+/* Medium screens (tablets, 768px and up) */
+@media (max-width: 768px) {
+  .container {
+    margin: 1rem auto;
+    padding: 1rem;
+  }
+
+  .actions {
+    flex-direction: column; /* Stack buttons vertically */
+    align-items: center; /* Center buttons */
+  }
+
+  .full_table {
+    display: block;
+    overflow-x: auto; /* Enable horizontal scrolling for the table */
+    white-space: nowrap; /* Prevent content from wrapping */
+  }
+
+  .tabhead,
+  .tabody,
+  .elements {
+    display: block; /* Make table elements block-level */
+    width: 100%; /* Full width for table elements */
+  }
+
+  .tabhead th {
+    text-align: center; /* Center align table headers */
+  }
+
+  .elements {
+    border-bottom: none; /* Remove individual cell borders */
+    padding: 10px; /* Adjust padding for better spacing */
+    box-sizing: border-box; /* Include padding in element's total width */
+  }
+
+  .tabody tr {
+    margin-bottom: 10px; /* Add space between table rows */
+    display: block; /* Make table rows block-level */
+    border: 1px solid #e0e0e0; /* Add a border around each row */
+    border-radius: 5px; /* Slightly round corners for rows */
+  }
+
+  .tabody td:before {
+    /* Create "headers" for table cells in small screens */
+    content: attr(data-label); /* Use data-label attribute as content */
+    font-weight: bold;
+    display: inline-block;
+    width: 100px; /* Adjust width as needed */
+    margin-right: 15px;
+  }
+}
+
+/* Small screens (phones, 480px and up) */
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.8rem; /* Slightly smaller heading for small screens */
+  }
+
+  .btn {
+    width: 90%; /* Make buttons wider */
+    text-align: center; /* Center button text */
+  }
+
+  .notice {
+    padding: 0.8rem; /* Slightly less padding for notice */
+  }
+
+  .tabody td:before {
+    width: 80px; /* Adjust width for smaller screens */
+  }
+}
